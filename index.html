@@ -463,7 +463,16 @@ const lessons = [
 
 let currentLesson = 0;
 let xp = 0;
+let hearts = 5;
 let answered = false;
+
+function updateStats() {
+  document.getElementById("xpDisplay").innerText = xp;
+  document.getElementById("hearts").innerText = hearts;
+  document.getElementById("streak").innerText = 0;
+}
+
+updateStats();
 
 function openLesson() {
   currentLesson = 0;
@@ -538,24 +547,45 @@ function checkAnswer(button, selected) {
 
     button.classList.add("correct");
 
+    xp += 10;
+
     document.getElementById("result").innerText =
       "✅ Correct! +10 XP";
 
-    xp += 10;
-
     document.getElementById("nextButton")
       .classList.remove("hidden");
+
+    updateStats();
 
   } else {
 
     button.classList.add("wrong");
 
-    document.getElementById("result").innerText =
-      "❌ Try again.";
+    hearts--;
 
+    if (hearts < 0) {
+      hearts = 0;
+    }
+
+    document.getElementById("result").innerText =
+      "❌ Try again. ❤️ -1";
+
+    updateStats();
+
+    if (hearts === 0) {
+
+      document.getElementById("result").innerText =
+        "❤️ No hearts left!";
+
+      const buttons =
+        document.querySelectorAll(".answer");
+
+      buttons.forEach(function(button) {
+        button.disabled = true;
+      });
+    }
   }
 }
-
 function nextLesson() {
 
   if (currentLesson < lessons.length - 1) {
