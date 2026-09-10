@@ -490,6 +490,35 @@ function updateStats() {
 }
 
 updateStats();
+  function refillHearts() {
+
+  const lastRefill =
+    Number(localStorage.getItem("thaiFlowLastRefill")) || 0;
+
+  const now = Date.now();
+
+  const oneDay =
+    24 * 60 * 60 * 1000;
+
+  if (now - lastRefill >= oneDay) {
+
+    hearts = 5;
+
+    localStorage.setItem(
+      "thaiFlowHearts",
+      hearts
+    );
+
+    localStorage.setItem(
+      "thaiFlowLastRefill",
+      now
+    );
+
+    updateStats();
+  }
+}
+
+refillHearts();
 
 function openLesson() {
   currentLesson = 0;
