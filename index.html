@@ -393,62 +393,9 @@ button {
 
 </div>
 
-
-<script>
-
-function openLesson() {
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("lesson").classList.remove("hidden");
-}
-
-function goHome() {
-  document.getElementById("lesson").classList.add("hidden");
-  document.getElementById("home").classList.remove("hidden");
-}
-
-function checkAnswer(button, correct) {
-
-  if (correct) {
-
-    button.classList.add("correct");
-
-    document.getElementById("result").innerHTML =
-      "✅ Correct! +10 XP";
-
-  } else {
-
-    button.classList.add("wrong");
-
-    document.getElementById("result").innerHTML =
-      "❌ Try again.";
-
-  }
-
-}
-
-function speakThai() {
-
-  if ("speechSynthesis" in window) {
-
-    const speech =
-      new SpeechSynthesisUtterance("สวัสดี");
-
-    speech.lang = "th-TH";
-
-    window.speechSynthesis.speak(speech);
-
-  } else {
-
-    alert("Speech is not supported on this browser.");
-
-  }
-
-}
-
 <script>
 
 const lessons = [
-
   {
     thai: "สวัสดี",
     pronunciation: "sa-wat-dee",
@@ -457,7 +404,6 @@ const lessons = [
     answers: ["Thank you", "Hello", "Goodbye"],
     correct: 1
   },
-
   {
     thai: "ขอบคุณ",
     pronunciation: "khop-khun",
@@ -466,7 +412,6 @@ const lessons = [
     answers: ["Sorry", "Thank you", "Hello"],
     correct: 1
   },
-
   {
     thai: "ลาก่อน",
     pronunciation: "la-gon",
@@ -475,7 +420,6 @@ const lessons = [
     answers: ["Goodbye", "Thank you", "Yes"],
     correct: 0
   },
-
   {
     thai: "สบายดีไหม",
     pronunciation: "sa-bai-dee-mai",
@@ -484,7 +428,6 @@ const lessons = [
     answers: ["How are you?", "Goodbye", "Thank you"],
     correct: 0
   },
-
   {
     thai: "สบายดี",
     pronunciation: "sa-bai-dee",
@@ -493,7 +436,6 @@ const lessons = [
     answers: ["I'm fine", "Sorry", "No"],
     correct: 0
   },
-
   {
     thai: "ขอโทษ",
     pronunciation: "kho-thot",
@@ -502,7 +444,6 @@ const lessons = [
     answers: ["Yes", "Sorry / Excuse me", "Hello"],
     correct: 1
   },
-
   {
     thai: "ใช่",
     pronunciation: "chai",
@@ -511,7 +452,6 @@ const lessons = [
     answers: ["No", "Yes", "Goodbye"],
     correct: 1
   },
-
   {
     thai: "ไม่ใช่",
     pronunciation: "mai-chai",
@@ -520,40 +460,42 @@ const lessons = [
     answers: ["Thank you", "Hello", "No / Not"],
     correct: 2
   }
-
 ];
 
 let currentLesson = 0;
 let xp = 0;
 let answered = false;
+  </div>
 
+</div>
 
+<script>
+
+const lessons = [
+  ...
+];
+
+let currentLesson = 0;
+let xp = 0;
+let answered = false;
 function openLesson() {
-
   currentLesson = 0;
   xp = 0;
 
-  document.getElementById("home")
-    .classList.add("hidden");
-
-  document.getElementById("lesson")
-    .classList.remove("hidden");
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("lesson").classList.remove("hidden");
 
   loadLesson();
-
 }
 
-
 function loadLesson() {
-
   const lesson = lessons[currentLesson];
 
   answered = false;
 
   document.getElementById("lessonNumber").innerText =
     "Chapter 1 · Unit 1 · Lesson " +
-    (currentLesson + 1) +
-    "/8";
+    (currentLesson + 1) + "/8";
 
   document.getElementById("lessonProgress").style.width =
     ((currentLesson + 1) / lessons.length * 100) + "%";
@@ -572,48 +514,36 @@ function loadLesson() {
 
   document.getElementById("result").innerText = "";
 
-  document.getElementById("nextButton")
-    .classList.add("hidden");
+  document.getElementById("nextButton").classList.add("hidden");
 
-  const answers =
-    document.getElementById("answers");
+  const answers = document.getElementById("answers");
 
   answers.innerHTML = "";
 
-  lesson.answers.forEach((answer, index) => {
+  lesson.answers.forEach(function(answer, index) {
 
-    const button =
-      document.createElement("button");
+    const button = document.createElement("button");
 
     button.className = "answer";
 
     button.innerText = answer;
 
     button.onclick = function() {
-
       checkAnswer(button, index);
-
     };
 
     answers.appendChild(button);
-
   });
-
-}
-
-
-function checkAnswer(button, selected) {
+    }
+  function checkAnswer(button, selected) {
 
   if (answered) return;
 
-  answered = true;
-
   const lesson = lessons[currentLesson];
 
-  const buttons =
-    document.querySelectorAll(".answer");
-
   if (selected === lesson.correct) {
+
+    answered = true;
 
     button.classList.add("correct");
 
@@ -622,23 +552,18 @@ function checkAnswer(button, selected) {
 
     xp += 10;
 
+    document.getElementById("nextButton")
+      .classList.remove("hidden");
+
   } else {
 
     button.classList.add("wrong");
 
-    buttons[lesson.correct]
-      .classList.add("correct");
-
     document.getElementById("result").innerText =
-      "❌ Not quite. The correct answer is highlighted.";
+      "❌ Try again.";
 
   }
-
-  document.getElementById("nextButton")
-    .classList.remove("hidden");
-
 }
-
 
 function nextLesson() {
 
@@ -650,7 +575,49 @@ function nextLesson() {
 
   } else {
 
-    document.getElementById("result").innerText
+    document.getElementById("result").innerText =
+      "🎉 Unit Complete! +" + xp + " XP";
+
+    document.getElementById("nextButton")
+      .classList.add("hidden");
+  }
+  }
+  function goHome() {
+
+  document.getElementById("lesson")
+    .classList.add("hidden");
+
+  document.getElementById("home")
+    .classList.remove("hidden");
+}
+
+
+function speakThai() {
+
+  if ("speechSynthesis" in window) {
+
+    const text = lessons[currentLesson].thai;
+
+    const speech =
+      new SpeechSynthesisUtterance(text);
+
+    speech.lang = "th-TH";
+
+    speech.rate = 0.8;
+
+    window.speechSynthesis.cancel();
+
+    window.speechSynthesis.speak(speech);
+
+  } else {
+
+    alert("Speech is not supported on this browser.");
+
+  }
+  }
+</script>
 
 </body>
-  </html>
+</html>
+
+
