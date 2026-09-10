@@ -731,7 +731,13 @@ function speakThai() {
 
   if ("speechSynthesis" in window) {
 
-    const text = lessons[currentLesson].thai;
+    let text;
+
+    if (currentUnit === 2) {
+      text = unit2Lessons[currentLesson].thai;
+    } else {
+      text = lessons[currentLesson].thai;
+    }
 
     const speech =
       new SpeechSynthesisUtterance(text);
