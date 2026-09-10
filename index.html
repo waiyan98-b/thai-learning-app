@@ -623,11 +623,7 @@ function openLesson() {
 
   loadLesson();
 }
-function openUnit2() {
 
-  alert("Unit 2 · Thai Sounds");
-
-  }
 function loadLesson() {
   const lesson = lessons[currentLesson];
 
@@ -678,7 +674,71 @@ function loadLesson() {
     answers.appendChild(button);
   });
 }
+function openUnit2() {
 
+  currentLesson = 0;
+
+  document.getElementById("home")
+    .classList.add("hidden");
+
+  document.getElementById("lesson")
+    .classList.remove("hidden");
+
+  loadUnit2Lesson();
+}
+  function loadUnit2Lesson() {
+
+  const lesson = unit2Lessons[currentLesson];
+
+  answered = false;
+
+  document.getElementById("lessonNumber").innerText =
+    "Chapter 1 · Unit 2 · Lesson " +
+    (currentLesson + 1) + "/8";
+
+  document.getElementById("lessonProgress").style.width =
+    ((currentLesson + 1) / unit2Lessons.length * 100) + "%";
+
+  document.getElementById("thaiWord").innerText =
+    lesson.thai;
+
+  document.getElementById("pronunciation").innerText =
+    lesson.pronunciation;
+
+  document.getElementById("meaning").innerText =
+    lesson.meaning;
+
+  document.getElementById("question").innerText =
+    lesson.question;
+
+  document.getElementById("result").innerText = "";
+
+  document.getElementById("nextButton")
+    .classList.add("hidden");
+
+  const answers =
+    document.getElementById("answers");
+
+  answers.innerHTML = "";
+
+  lesson.answers.forEach(function(answer, index) {
+
+    const button =
+      document.createElement("button");
+
+    button.className = "answer";
+
+    button.innerText = answer;
+
+    button.onclick = function() {
+
+      checkUnit2Answer(button, index);
+
+    };
+
+    answers.appendChild(button);
+  });
+      }
 function checkAnswer(button, selected) {
 
   if (answered) return;
