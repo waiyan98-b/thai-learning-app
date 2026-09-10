@@ -488,72 +488,7 @@ const lessons = [
     correct: 2
   }
 ];
- const unit2Lessons = [
-  {
-    thai: "ก",
-    pronunciation: "ko kai",
-    meaning: "ก — k sound",
-    question: "Which sound does ก represent?",
-    answers: ["k", "m", "n"],
-    correct: 0
-  },
-  {
-    thai: "ข",
-    pronunciation: "kho khai",
-    meaning: "ข — kh sound",
-    question: "Which sound does ข represent?",
-    answers: ["k", "kh", "m"],
-    correct: 1
-  },
-  {
-    thai: "ค",
-    pronunciation: "kho khwai",
-    meaning: "ค — kh sound",
-    question: "Which sound does ค represent?",
-    answers: ["kh", "t", "n"],
-    correct: 0
-  },
-  {
-    thai: "ง",
-    pronunciation: "ngo ngu",
-    meaning: "ง — ng sound",
-    question: "Which sound does ง represent?",
-    answers: ["n", "ng", "m"],
-    correct: 1
-  },
-  {
-    thai: "จ",
-    pronunciation: "cho chan",
-    meaning: "จ — j/ch sound",
-    question: "Which sound does จ represent?",
-    answers: ["j/ch", "k", "s"],
-    correct: 0
-  },
-  {
-    thai: "ช",
-    pronunciation: "cho chang",
-    meaning: "ช — ch sound",
-    question: "Which sound does ช represent?",
-    answers: ["t", "ch", "p"],
-    correct: 1
-  },
-  {
-    thai: "ด",
-    pronunciation: "do dek",
-    meaning: "ด — d sound",
-    question: "Which sound does ด represent?",
-    answers: ["d", "t", "k"],
-    correct: 0
-  },
-  {
-    thai: "ต",
-    pronunciation: "to tao",
-    meaning: "ต — t sound",
-    question: "Which sound does ต represent?",
-    answers: ["d", "t", "n"],
-    correct: 1
-  }
-]; 
+ 
 
 let currentLesson = 0;
 
@@ -674,71 +609,7 @@ function loadLesson() {
     answers.appendChild(button);
   });
 }
-function openUnit2() {
 
-  currentLesson = 0;
-
-  document.getElementById("home")
-    .classList.add("hidden");
-
-  document.getElementById("lesson")
-    .classList.remove("hidden");
-
-  loadUnit2Lesson();
-}
-  function loadUnit2Lesson() {
-
-  const lesson = unit2Lessons[currentLesson];
-
-  answered = false;
-
-  document.getElementById("lessonNumber").innerText =
-    "Chapter 1 · Unit 2 · Lesson " +
-    (currentLesson + 1) + "/8";
-
-  document.getElementById("lessonProgress").style.width =
-    ((currentLesson + 1) / unit2Lessons.length * 100) + "%";
-
-  document.getElementById("thaiWord").innerText =
-    lesson.thai;
-
-  document.getElementById("pronunciation").innerText =
-    lesson.pronunciation;
-
-  document.getElementById("meaning").innerText =
-    lesson.meaning;
-
-  document.getElementById("question").innerText =
-    lesson.question;
-
-  document.getElementById("result").innerText = "";
-
-  document.getElementById("nextButton")
-    .classList.add("hidden");
-
-  const answers =
-    document.getElementById("answers");
-
-  answers.innerHTML = "";
-
-  lesson.answers.forEach(function(answer, index) {
-
-    const button =
-      document.createElement("button");
-
-    button.className = "answer";
-
-    button.innerText = answer;
-
-    button.onclick = function() {
-
-      checkUnit2Answer(button, index);
-
-    };
-
-    answers.appendChild(button);
-  });
-      }
 function checkAnswer(button, selected) {
 
   if (answered) return;
@@ -874,7 +745,198 @@ function speakThai() {
 
   }
 }
+  const unit2Lessons = [
+  {
+    thai: "ก",
+    pronunciation: "ko kai",
+    meaning: "ก — k sound",
+    question: "Which sound does ก represent?",
+    answers: ["k", "m", "n"],
+    correct: 0
+  },
+  {
+    thai: "ข",
+    pronunciation: "kho khai",
+    meaning: "ข — kh sound",
+    question: "Which sound does ข represent?",
+    answers: ["k", "kh", "m"],
+    correct: 1
+  },
+  {
+    thai: "ค",
+    pronunciation: "kho khwai",
+    meaning: "ค — kh sound",
+    question: "Which sound does ค represent?",
+    answers: ["kh", "t", "n"],
+    correct: 0
+  },
+  {
+    thai: "ง",
+    pronunciation: "ngo ngu",
+    meaning: "ง — ng sound",
+    question: "Which sound does ง represent?",
+    answers: ["n", "ng", "m"],
+    correct: 1
+  },
+  {
+    thai: "จ",
+    pronunciation: "cho chan",
+    meaning: "จ — j/ch sound",
+    question: "Which sound does จ represent?",
+    answers: ["j/ch", "k", "s"],
+    correct: 0
+  },
+  {
+    thai: "ช",
+    pronunciation: "cho chang",
+    meaning: "ช — ch sound",
+    question: "Which sound does ช represent?",
+    answers: ["t", "ch", "p"],
+    correct: 1
+  },
+  {
+    thai: "ด",
+    pronunciation: "do dek",
+    meaning: "ด — d sound",
+    question: "Which sound does ด represent?",
+    answers: ["d", "t", "k"],
+    correct: 0
+  },
+  {
+    thai: "ต",
+    pronunciation: "to tao",
+    meaning: "ต — t sound",
+    question: "Which sound does ต represent?",
+    answers: ["d", "t", "n"],
+    correct: 1
+  }
+]; 
+function openUnit2() {
 
+  currentLesson = 0;
+
+  document.getElementById("home")
+    .classList.add("hidden");
+
+  document.getElementById("lesson")
+    .classList.remove("hidden");
+
+  loadUnit2Lesson();
+}
+  function loadUnit2Lesson() {
+
+  const lesson = unit2Lessons[currentLesson];
+
+  answered = false;
+
+  document.getElementById("lessonNumber").innerText =
+    "Chapter 1 · Unit 2 · Lesson " +
+    (currentLesson + 1) + "/8";
+
+  document.getElementById("lessonProgress").style.width =
+    ((currentLesson + 1) / unit2Lessons.length * 100) + "%";
+
+  document.getElementById("thaiWord").innerText =
+    lesson.thai;
+
+  document.getElementById("pronunciation").innerText =
+    lesson.pronunciation;
+
+  document.getElementById("meaning").innerText =
+    lesson.meaning;
+
+  document.getElementById("question").innerText =
+    lesson.question;
+
+  document.getElementById("result").innerText = "";
+
+  document.getElementById("nextButton")
+    .classList.add("hidden");
+
+  const answers =
+    document.getElementById("answers");
+
+  answers.innerHTML = "";
+
+  lesson.answers.forEach(function(answer, index) {
+
+    const button =
+      document.createElement("button");
+
+    button.className = "answer";
+
+    button.innerText = answer;
+
+    button.onclick = function() {
+
+      checkUnit2Answer(button, index);
+
+    };
+
+    answers.appendChild(button);
+  });
+  }
+  function checkUnit2Answer(button, selected) {
+
+  if (answered) return;
+
+  const lesson = unit2Lessons[currentLesson];
+
+  if (selected === lesson.correct) {
+
+    answered = true;
+
+    button.classList.add("correct");
+
+    xp += 10;
+
+    localStorage.setItem(
+      "thaiFlowXP",
+      xp
+    );
+
+    document.getElementById("result").innerText =
+      "✅ Correct! +10 XP";
+
+    document.getElementById("nextButton")
+      .classList.remove("hidden");
+
+    updateStats();
+
+  } else {
+
+    button.classList.add("wrong");
+
+    hearts--;
+
+    if (hearts < 0) {
+      hearts = 0;
+    }
+
+    localStorage.setItem(
+      "thaiFlowHearts",
+      hearts
+    );
+
+    document.getElementById("result").innerText =
+      "❌ Try again. ❤️ -1";
+
+    updateStats();
+
+    if (hearts === 0) {
+
+      document.getElementById("result").innerText =
+        "❤️ No hearts left!";
+
+      const buttons =
+        document.querySelectorAll(".answer");
+
+      buttons.forEach(function(button) {
+        button.disabled = true;
+      });
+    }
+  }
+  }
 </script>
 
 
