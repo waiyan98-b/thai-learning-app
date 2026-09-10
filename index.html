@@ -688,6 +688,10 @@ document.getElementById("result").innerText =
   }
 }
 function nextLesson() {
+    if (currentUnit === 2) {
+    nextUnit2Lesson();
+    return;
+  }
 
   if (currentLesson < lessons.length - 1) {
 
@@ -816,6 +820,7 @@ function speakThai() {
 function openUnit2() {
 
   currentLesson = 0;
+  currentUnit = 2;
 
   document.getElementById("home")
     .classList.add("hidden");
