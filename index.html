@@ -1,1 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThaiFlow</title>
 
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.app {
+  max-width: 520px;
+  margin: auto;
+  min-height: 100vh;
+  background: white;
+}
+
+header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.stats {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.screen {
+  padding: 25px 20px 100px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+.subtitle {
+  color: #777;
+  line-height: 1.5;
+}
+
+.card {
+  border: 2px solid #e5e5e5;
+  border-radius: 18px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.chapter {
+  margin-top: 25px;
+}
+
+.chapter-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.unit {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.unit:hover {
+  background: #fafafa;
+}
+
+.unit-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.unit-name {
+  font-weight: bold;
+}
+
+.unit-info {
+  color: #888;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.lesson {
+  text-align: center;
+}
+
+.thai-word {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 35px 0 10px;
+}
+
+.pronunciation {
+  color: #777;
+  font-size: 18px;
+}
+
+.meaning {
+  font-size: 21px;
+  margin: 25px 0;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.primary {
+  background: #58cc02;
+  color: white;
+}
+
+.secondary {
+  background: #eee;
+  color: #333;
+}
+
+.answer {
+  border: 2px solid #ddd;
+  background: white;
+  text-align: left;
+}
+
+.answer.correct {
+  border-color: #58cc02;
+  background: #eaffdf;
+}
+
+.answer.wrong {
+  border-color: #ff4b4b;
+  background: #ffe5e5;
+}
+
+.progress {
+  height: 10px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 20%;
+  background: #58cc02;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 520px;
+  width: 100%;
+  background: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 5px;
+}
+
+.nav-item {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+}
+
+.nav-item.active {
+  color: #58cc02;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">🇹🇭 ThaiFlow</div>
+
+  <div class="stats">
+    <span>🔥 0</span>
+    <span>❤️ 5</span>
+    <span>⭐ 0</span>
+  </div>
+</header>
+
+<!-- HOME -->
+<div id="home" class="screen">
+
+  <h1>Learn Thai 🇹🇭</h1>
+
+  <p class="subtitle">
+    Learn Thai step by step through speaking,
+    listening, reading and writing.
+  </p>
+
+  <div class="card">
+
+    <strong>Your Daily Goal</strong>
+
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+
+    <p>0 / 20 XP today</p>
+
+  </div>
+
+  <div class="chapter">
+
+    <div class="chapter-title">
+      Chapter 1 · Thai Basics
+    </div>
+
+    <div class="unit" onclick="openLesson()">
+
+      <div class="unit-icon">👋</div>
+
+      <div>
+        <div class="unit-name">
+          Unit 1 · Greetings
+        </div>
+
+        <div class="unit-info">
+          Hello · Goodbye · Thank you
+        </div>
+      </div>
+
+    </div>
+
+    <div class="unit">
+
+      <div class="unit-icon">🔤</div>
+
+      <div>
+        <div class="unit-name">
+          Unit 2 · Thai Sounds
+        </div>
+
+        <div class="unit-info">
+          Basic pronunciation
+        </div>
+      </div>
+
+    </div>
+
+    <div class="unit">
+
+      <div class="unit-icon">🔢</div>
+
+      <div>
+        <div class="unit-name">
+          Unit 3 · Numbers
+        </div>
+
+        <div class="unit-info">
+          1–10 in Thai
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- LESSON -->
+<div id="lesson" class="screen hidden">
+
+  <div class="lesson">
+
+    <p>Chapter 1 · Unit 1</p>
+
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+
+    <h2>Learn this word</h2>
+
+    <div class="thai-word">
+      สวัสดี
+    </div>
+
+    <div class="pronunciation">
+      sa-wat-dee
+    </div>
+
+    <div class="meaning">
+      Hello / Hi
+    </div>
+
+    <button class="primary" onclick="speakThai()">
+      🔊 Listen
+    </button>
+
+    <h2>What does สวัสดี mean?</h2>
+
+    <button class="answer" onclick="checkAnswer(this, false)">
+      Thank you
+    </button>
+
+    <button class="answer" onclick="checkAnswer(this, true)">
+      Hello
+    </button>
+
+    <button class="answer" onclick="checkAnswer(this, false)">
+      Goodbye
+    </button>
+
+    <p id="result"></p>
+
+    <button class="secondary" onclick="goHome()">
+      ← Back to Course
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+  <div class="nav-item active">
+    🏠<br>
+    Learn
+  </div>
+
+  <div class="nav-item">
+    🏆<br>
+    Practice
+  </div>
+
+  <div class="nav-item">
+    📊<br>
+    Progress
+  </div>
+
+  <div class="nav-item">
+    👤<br>
+    Profile
+  </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function openLesson() {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("lesson").classList.remove("hidden");
+}
+
+function goHome() {
+  document.getElementById("lesson").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+}
+
+function checkAnswer(button, correct) {
+
+  if (correct) {
+
+    button.classList.add("correct");
+
+    document.getElementById("result").innerHTML =
+      "✅ Correct! +10 XP";
+
+  } else {
+
+    button.classList.add("wrong");
+
+    document.getElementById("result").innerHTML =
+      "❌ Try again.";
+
+  }
+
+}
+
+function speakThai() {
+
+  if ("speechSynthesis" in window) {
+
+    const speech =
+      new SpeechSynthesisUtterance("สวัสดี");
+
+    speech.lang = "th-TH";
+
+    window.speechSynthesis.speak(speech);
+
+  } else {
+
+    alert("Speech is not supported on this browser.");
+
+  }
+
+}
+
+</script>
+
+</body>
+  </html>
