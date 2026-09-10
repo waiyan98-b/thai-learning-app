@@ -937,6 +937,33 @@ function openUnit2() {
     }
   }
   }
+  function nextUnit2Lesson() {
+
+  if (currentLesson < unit2Lessons.length - 1) {
+
+    currentLesson++;
+
+    loadUnit2Lesson();
+
+  } else {
+
+    document.getElementById("lesson")
+      .classList.add("hidden");
+
+    document.getElementById("complete")
+      .classList.remove("hidden");
+
+    document.getElementById("completeXP")
+      .innerText = xp;
+
+    document.getElementById("completeHearts")
+      .innerText = hearts;
+
+    document.getElementById("completeStreak")
+      .innerText =
+      Number(localStorage.getItem("thaiFlowStreak")) || 0;
+  }
+  }
 </script>
 
 
