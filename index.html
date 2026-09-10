@@ -485,7 +485,8 @@ updateStats();
 function updateStats() {
   document.getElementById("xpDisplay").innerText = xp;
   document.getElementById("hearts").innerText = hearts;
-  document.getElementById("streak").innerText = 0;
+  document.getElementById("streak").innerText = 
+    Number(localStorage.getItem("thaiFlowStreak")) || 0
 }
 
 updateStats();
