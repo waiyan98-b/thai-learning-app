@@ -567,6 +567,28 @@ function checkAnswer(button, selected) {
     xp += 10;
 
 localStorage.setItem("thaiFlowXP", xp);
+    const today = new Date().toDateString();
+
+const lastDay =
+  localStorage.getItem("thaiFlowLastDay");
+
+let streak =
+  Number(localStorage.getItem("thaiFlowStreak")) || 0;
+
+if (lastDay !== today) {
+
+  streak++;
+
+  localStorage.setItem(
+    "thaiFlowStreak",
+    streak
+  );
+
+  localStorage.setItem(
+    "thaiFlowLastDay",
+    today
+  );
+}
 
 document.getElementById("result").innerText =
   "✅ Correct! +10 XP";
