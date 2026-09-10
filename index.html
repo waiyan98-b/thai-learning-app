@@ -694,14 +694,23 @@ function nextLesson() {
 
   } else {
 
-    document.getElementById("result").innerText =
-      "🎉 Unit Complete! +" + xp + " XP";
-
-    document.getElementById("nextButton")
+    document.getElementById("lesson")
       .classList.add("hidden");
-  }
-}
 
+    document.getElementById("complete")
+      .classList.remove("hidden");
+
+    document.getElementById("completeXP")
+      .innerText = xp;
+
+    document.getElementById("completeHearts")
+      .innerText = hearts;
+
+    document.getElementById("completeStreak")
+      .innerText =
+      Number(localStorage.getItem("thaiFlowStreak")) || 0;
+  }
+  }
 function goHome() {
 
   document.getElementById("lesson")
