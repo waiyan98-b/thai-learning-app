@@ -491,6 +491,7 @@ const lessons = [
  
 
 let currentLesson = 0;
+  let currentUnit = 1;
 
 let xp =
   Number(localStorage.getItem("thaiFlowXP")) || 0;
@@ -551,6 +552,7 @@ refillHearts();
 
 function openLesson() {
   currentLesson = 0;
+  currentUnit = 1;
   xp = 0;
 
   document.getElementById("home").classList.add("hidden");
