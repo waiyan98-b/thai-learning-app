@@ -462,58 +462,8 @@ const lessons = [
 ];
 
 let currentLesson = 0;
-
-let xp = Number(localStorage.getItem("thaiFlowXP")) || 0;
-
-let hearts = Number(localStorage.getItem("thaiFlowHearts")) || 5;
-
+let xp = 0;
 let answered = false;
-
-
-function updateStats() {
-
-  document.getElementById("xpDisplay").innerText = xp;
-
-  document.getElementById("hearts").innerText = hearts;
-
-  document.getElementById("streak").innerText =
-    Number(localStorage.getItem("thaiFlowStreak")) || 0;
-}
-
-
-updateStats();
-
-
-function refillHearts() {
-
-  const lastRefill =
-    Number(localStorage.getItem("thaiFlowLastRefill")) || 0;
-
-  const now = Date.now();
-
-  const oneDay = 24 * 60 * 60 * 1000;
-
-
-  if (now - lastRefill >= oneDay) {
-
-    hearts = 5;
-
-    localStorage.setItem(
-      "thaiFlowHearts",
-      hearts
-    );
-
-    localStorage.setItem(
-      "thaiFlowLastRefill",
-      now
-    );
-
-    updateStats();
-  }
-}
-
-
-refillHearts();
 
 function openLesson() {
   currentLesson = 0;
@@ -537,22 +487,35 @@ function loadLesson() {
   document.getElementById("lessonProgress").style.width =
     ((currentLesson + 1) / lessons.length * 100) + "%";
 
-  document.getElementById("thaiWord").innerText = lesson.thai;
-  document.getElementById("pronunciation").innerText = lesson.pronunciation;
-  document.getElementById("meaning").innerText = lesson.meaning;
-  document.getElementById("question").innerText = lesson.question;
+  document.getElementById("thaiWord").innerText =
+    lesson.thai;
+
+  document.getElementById("pronunciation").innerText =
+    lesson.pronunciation;
+
+  document.getElementById("meaning").innerText =
+    lesson.meaning;
+
+  document.getElementById("question").innerText =
+    lesson.question;
+
   document.getElementById("result").innerText = "";
 
-  document.getElementById("nextButton").classList.add("hidden");
+  document.getElementById("nextButton")
+    .classList.add("hidden");
 
-  const answers = document.getElementById("answers");
+  const answers =
+    document.getElementById("answers");
+
   answers.innerHTML = "";
 
   lesson.answers.forEach(function(answer, index) {
 
-    const button = document.createElement("button");
+    const button =
+      document.createElement("button");
 
     button.className = "answer";
+
     button.innerText = answer;
 
     button.onclick = function() {
@@ -582,39 +545,16 @@ function checkAnswer(button, selected) {
 
     document.getElementById("nextButton")
       .classList.remove("hidden");
-} else {
 
-  button.classList.add("wrong");
+  } else {
 
-  hearts--;
-
-  if (hearts < 0) {
-    hearts = 0;
-  }
-
-  localStorage.setItem(
-    "thaiFlowHearts",
-    hearts
-  );
-
-  document.getElementById("result").innerText =
-    "❌ Try again. ❤️ -1";
-
-  updateStats();
-
-  if (hearts === 0) {
+    button.classList.add("wrong");
 
     document.getElementById("result").innerText =
-      "❤️ No hearts left!";
+      "❌ Try again.";
 
-    const buttons =
-      document.querySelectorAll(".answer");
-
-    buttons.forEach(function(button) {
-      button.disabled = true;
-    });
   }
-  }
+}
 
 function nextLesson() {
 
@@ -656,16 +596,20 @@ function speakThai() {
     speech.rate = 0.8;
 
     window.speechSynthesis.cancel();
+
     window.speechSynthesis.speak(speech);
 
   } else {
 
-    alert("Speech is not supported on this browser.");
+    alert(
+      "Speech is not supported on this browser."
+    );
 
   }
 }
 
 </script>
+
 
 </body>
 </html>
