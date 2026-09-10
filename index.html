@@ -392,7 +392,6 @@ button {
 </div>
 
 </div>
-
 <script>
 
 const lessons = [
@@ -465,19 +464,7 @@ const lessons = [
 let currentLesson = 0;
 let xp = 0;
 let answered = false;
-  </div>
 
-</div>
-
-<script>
-
-const lessons = [
-  ...
-];
-
-let currentLesson = 0;
-let xp = 0;
-let answered = false;
 function openLesson() {
   currentLesson = 0;
   xp = 0;
@@ -500,24 +487,15 @@ function loadLesson() {
   document.getElementById("lessonProgress").style.width =
     ((currentLesson + 1) / lessons.length * 100) + "%";
 
-  document.getElementById("thaiWord").innerText =
-    lesson.thai;
-
-  document.getElementById("pronunciation").innerText =
-    lesson.pronunciation;
-
-  document.getElementById("meaning").innerText =
-    lesson.meaning;
-
-  document.getElementById("question").innerText =
-    lesson.question;
-
+  document.getElementById("thaiWord").innerText = lesson.thai;
+  document.getElementById("pronunciation").innerText = lesson.pronunciation;
+  document.getElementById("meaning").innerText = lesson.meaning;
+  document.getElementById("question").innerText = lesson.question;
   document.getElementById("result").innerText = "";
 
   document.getElementById("nextButton").classList.add("hidden");
 
   const answers = document.getElementById("answers");
-
   answers.innerHTML = "";
 
   lesson.answers.forEach(function(answer, index) {
@@ -525,7 +503,6 @@ function loadLesson() {
     const button = document.createElement("button");
 
     button.className = "answer";
-
     button.innerText = answer;
 
     button.onclick = function() {
@@ -534,8 +511,9 @@ function loadLesson() {
 
     answers.appendChild(button);
   });
-    }
-  function checkAnswer(button, selected) {
+}
+
+function checkAnswer(button, selected) {
 
   if (answered) return;
 
@@ -581,8 +559,9 @@ function nextLesson() {
     document.getElementById("nextButton")
       .classList.add("hidden");
   }
-  }
-  function goHome() {
+}
+
+function goHome() {
 
   document.getElementById("lesson")
     .classList.add("hidden");
@@ -590,7 +569,6 @@ function nextLesson() {
   document.getElementById("home")
     .classList.remove("hidden");
 }
-
 
 function speakThai() {
 
@@ -602,11 +580,9 @@ function speakThai() {
       new SpeechSynthesisUtterance(text);
 
     speech.lang = "th-TH";
-
     speech.rate = 0.8;
 
     window.speechSynthesis.cancel();
-
     window.speechSynthesis.speak(speech);
 
   } else {
@@ -614,10 +590,9 @@ function speakThai() {
     alert("Speech is not supported on this browser.");
 
   }
-  }
+}
+
 </script>
 
 </body>
 </html>
-
-
