@@ -462,8 +462,58 @@ const lessons = [
 ];
 
 let currentLesson = 0;
-let xp = 0;
+
+let xp = Number(localStorage.getItem("thaiFlowXP")) || 0;
+
+let hearts = Number(localStorage.getItem("thaiFlowHearts")) || 5;
+
 let answered = false;
+
+
+function updateStats() {
+
+  document.getElementById("xpDisplay").innerText = xp;
+
+  document.getElementById("hearts").innerText = hearts;
+
+  document.getElementById("streak").innerText =
+    Number(localStorage.getItem("thaiFlowStreak")) || 0;
+}
+
+
+updateStats();
+
+
+function refillHearts() {
+
+  const lastRefill =
+    Number(localStorage.getItem("thaiFlowLastRefill")) || 0;
+
+  const now = Date.now();
+
+  const oneDay = 24 * 60 * 60 * 1000;
+
+
+  if (now - lastRefill >= oneDay) {
+
+    hearts = 5;
+
+    localStorage.setItem(
+      "thaiFlowHearts",
+      hearts
+    );
+
+    localStorage.setItem(
+      "thaiFlowLastRefill",
+      now
+    );
+
+    updateStats();
+  }
+}
+
+
+refillHearts();
 
 function openLesson() {
   currentLesson = 0;
@@ -532,16 +582,39 @@ function checkAnswer(button, selected) {
 
     document.getElementById("nextButton")
       .classList.remove("hidden");
+} else {
 
-  } else {
+  button.classList.add("wrong");
 
-    button.classList.add("wrong");
+  hearts--;
+
+  if (hearts < 0) {
+    hearts = 0;
+  }
+
+  localStorage.setItem(
+    "thaiFlowHearts",
+    hearts
+  );
+
+  document.getElementById("result").innerText =
+    "❌ Try again. ❤️ -1";
+
+  updateStats();
+
+  if (hearts === 0) {
 
     document.getElementById("result").innerText =
-      "❌ Try again.";
+      "❤️ No hearts left!";
 
+    const buttons =
+      document.querySelectorAll(".answer");
+
+    buttons.forEach(function(button) {
+      button.disabled = true;
+    });
   }
-}
+  }
 
 function nextLesson() {
 
