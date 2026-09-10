@@ -462,9 +462,25 @@ const lessons = [
 ];
 
 let currentLesson = 0;
-let xp = 0;
-let hearts = 5;
+
+let xp =
+  Number(localStorage.getItem("thaiFlowXP")) || 0;
+
+let hearts =
+  Number(localStorage.getItem("thaiFlowHearts")) || 5;
+
 let answered = false;
+
+function updateStats() {
+
+  document.getElementById("xpDisplay").innerText = xp;
+
+  document.getElementById("hearts").innerText = hearts;
+
+  document.getElementById("streak").innerText = 0;
+}
+
+updateStats();
 
 function updateStats() {
   document.getElementById("xpDisplay").innerText = xp;
@@ -549,9 +565,10 @@ function checkAnswer(button, selected) {
 
     xp += 10;
 
-    document.getElementById("result").innerText =
-      "✅ Correct! +10 XP";
+localStorage.setItem("thaiFlowXP", xp);
 
+document.getElementById("result").innerText =
+  "✅ Correct! +10 XP";
     document.getElementById("nextButton")
       .classList.remove("hidden");
 
@@ -566,6 +583,7 @@ function checkAnswer(button, selected) {
     if (hearts < 0) {
       hearts = 0;
     }
+    localStorage.setItem("thaiFlowHearts", hearts);
 
     document.getElementById("result").innerText =
       "❌ Try again. ❤️ -1";
