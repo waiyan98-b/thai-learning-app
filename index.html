@@ -1167,6 +1167,19 @@ function openUnit2() {
 
   loadUnit3Lesson();
 }
+  function openUnit4() {
+
+  currentLesson = 0;
+  currentUnit = 4;
+
+  document.getElementById("home")
+    .classList.add("hidden");
+
+  document.getElementById("lesson")
+    .classList.remove("hidden");
+
+  loadUnit4Lesson();
+  }
   function nextUnit2Lesson() {
 
   if (currentLesson < unit2Lessons.length - 1) {
