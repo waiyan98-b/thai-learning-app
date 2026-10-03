@@ -1257,6 +1257,57 @@ function openUnit2() {
     answers.appendChild(button);
   });
   }
+  function loadUnit4Lesson() {
+
+  const lesson = unit4Lessons[currentLesson];
+
+  answered = false;
+
+  document.getElementById("lessonNumber").innerText =
+    "Chapter 1 · Unit 4 · Lesson " +
+    (currentLesson + 1) + "/10";
+
+  document.getElementById("lessonProgress").style.width =
+    ((currentLesson + 1) / unit4Lessons.length * 100) + "%";
+
+  document.getElementById("thaiWord").innerText =
+    lesson.thai;
+
+  document.getElementById("pronunciation").innerText =
+    lesson.pronunciation;
+
+  document.getElementById("meaning").innerText =
+    lesson.meaning;
+
+  document.getElementById("question").innerText =
+    lesson.question;
+
+  document.getElementById("result").innerText = "";
+
+  document.getElementById("nextButton")
+    .classList.add("hidden");
+
+  const answers =
+    document.getElementById("answers");
+
+  answers.innerHTML = "";
+
+  lesson.answers.forEach(function(answer, index) {
+
+    const button =
+      document.createElement("button");
+
+    button.className = "answer";
+
+    button.innerText = answer;
+
+    button.onclick = function() {
+      checkUnit4Answer(button, index);
+    };
+
+    answers.appendChild(button);
+  });
+  }
   function checkUnit3Answer(button, selected) {
 
   if (answered) return;
