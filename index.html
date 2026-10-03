@@ -1141,6 +1141,67 @@ function openUnit2() {
     answers.appendChild(button);
   });
   }
+  function checkUnit3Answer(button, selected) {
+
+  if (answered) return;
+
+  const lesson = unit3Lessons[currentLesson];
+
+  if (selected === lesson.correct) {
+
+    answered = true;
+
+    button.classList.add("correct");
+
+    xp += 10;
+
+    localStorage.setItem(
+      "thaiFlowXP",
+      xp
+    );
+
+    document.getElementById("result").innerText =
+      "✅ Correct! +10 XP";
+
+    document.getElementById("nextButton")
+      .classList.remove("hidden");
+
+    updateStats();
+
+  } else {
+
+    button.classList.add("wrong");
+
+    hearts--;
+
+    if (hearts < 0) {
+      hearts = 0;
+    }
+
+    localStorage.setItem(
+      "thaiFlowHearts",
+      hearts
+    );
+
+    document.getElementById("result").innerText =
+      "❌ Try again. ❤️ -1";
+
+    updateStats();
+
+    if (hearts === 0) {
+
+      document.getElementById("result").innerText =
+        "❤️ No hearts left!";
+
+      const buttons =
+        document.querySelectorAll(".answer");
+
+      buttons.forEach(function(button) {
+        button.disabled = true;
+      });
+    }
+  }
+  }
 </script>
 
 
